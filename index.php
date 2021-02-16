@@ -9,13 +9,13 @@ define('PG_SALT', '0000000000000000');
 define('PG_PAY_ID', '0000000000000000');
 
 $pg_transaction = new BPPGModule;
-$pg_transaction->setPayId($_REQUEST['PAY_ID']);
-$pg_transaction->setPgRequestUrl(PG_REQUEST_URL);
-$pg_transaction->setSalt($_REQUEST['SALT']);
-$pg_transaction->setReturnUrl($_REQUEST['RETURN_URL']);
+@$pg_transaction->setPayId($_REQUEST['PAY_ID']);
+@$pg_transaction->setPgRequestUrl(PG_REQUEST_URL);
+@$pg_transaction->setSalt($_REQUEST['SALT']);
+@$pg_transaction->setReturnUrl($_REQUEST['RETURN_URL']);
 $pg_transaction->setCurrencyCode(356);
 $pg_transaction->setTxnType('SALE');
-$pg_transaction->setOrderId($_REQUEST['ORDER_ID']);
+@$pg_transaction->setOrderId($_REQUEST['ORDER_ID']);
 @$pg_transaction->setCustEmail($_REQUEST['CUST_EMAIL']);
 @$pg_transaction->setCustName($_REQUEST['CUST_NAME']);
 @$pg_transaction->setCustStreetAddress1($_REQUEST['CUST_STREET_ADDRESS1']);
@@ -122,7 +122,7 @@ if (isset($_REQUEST['payment_check'])) {
                 <tr>
                     <td width="28%" align="right" valign="middle" class="labelfont">CUSTOMER ADDRESS: </td>
                     <td width="65%" align="left" valign="middle">
-                        <input type="text" name="CUST_STREET_ADDRESS1" class="signuptextfield" value="Gurgaon" autocomplete="off"/>
+                        <input type="text" name="CUST_STREET_ADDRESS1" class="signuptextfield" value="Noida" autocomplete="off"/>
                     </td>
                     <td width="7%" align="left" valign="middle">&nbsp;</td>
                 </tr>                   
@@ -136,14 +136,14 @@ if (isset($_REQUEST['payment_check'])) {
                 <tr>
                     <td width="28%" align="right" valign="middle" class="labelfont">CUSTOMER PHONE: </td>
                     <td width="65%" align="left" valign="middle">
-                        <input type="text" name="CUST_PHONE" value="9911889966" class="signuptextfield" autocomplete="off"/>
+                        <input type="text" name="CUST_PHONE" value="9999999999" class="signuptextfield" autocomplete="off"/>
                     </td>
                     <td width="7%" align="left" valign="middle">&nbsp;</td>
                 </tr>
                 <tr>
                     <td width="28%" align="right" valign="middle" class="labelfont">CUSTOMER EMAILID: </td>
                     <td width="65%" align="left" valign="middle">
-                        <input type="text" name="CUST_EMAIL" class="signuptextfield" value="neeraj.kumar@bhartipay.com" autocomplete="off"/>
+                        <input type="text" name="CUST_EMAIL" class="signuptextfield" value="rohit.singh@bhartipay.com" autocomplete="off"/>
                     </td>
                     <td width="7%" align="left" valign="middle">&nbsp;</td>
                 </tr>
