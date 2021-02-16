@@ -535,31 +535,24 @@ class BPPGModule
      */
     public function validateResponse($response)
     {
-        $postdata = array(
-            'AMOUNT' => $response['AMOUNT'],
-            'CURRENCY_CODE' => $response['CURRENCY_CODE'],
-            'CUST_EMAIL' => $response['CUST_EMAIL'],
-            'CUST_NAME' => $response['CUST_NAME'],
-            'CUST_PHONE' => $response['CUST_PHONE'],
-            'ORDER_ID' => $response['ORDER_ID'],
-            'PAY_ID' => $response['PAY_ID'],
-            'PRODUCT_DESC' => $response['PRODUCT_DESC'],
-            // 'RESPONSE_CODE' => $response['RESPONSE_CODE'],
-            // 'RESPONSE_DATE_TIME' => $response['RESPONSE_DATE_TIME'],
-            // 'RESPONSE_MESSAGE' => $response['RESPONSE_MESSAGE'],
-            'RETURN_URL' => $response['RETURN_URL'],
-            // 'STATUS' => $response['STATUS'],
-            'TXNTYPE' => $response['TXNTYPE'],
-            // 'TXN_ID' => $response['TXN_ID']
-        );
+        $postdata = $response;
+        //please assign your salt here
+        $salt='your salt';
         ksort($postdata);
+        unset($postdata["HASH"]);
+        unset($postdata["CARD_ISSUER_BANK"]);
+      
         $all = '';
         foreach ($postdata as $name => $value) {
             $all .= $name."=".$value."~";
         }
         $all = substr($all, 0, -1);
-        $all .= $this->salt;
+        $all .= $salt;
+        
+      
+
         $generated_hash = strtoupper(hash('sha256', $all));
+    
         if ($response['HASH'] == $generated_hash) {
             return true;
         } else {
